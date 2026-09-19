@@ -1,5 +1,5 @@
 # Publica el formulario en GitHub Pages en cada push a la rama.
-# La primera ejecución activa Pages automáticamente (enablement: true).
+# Requiere que en Settings → Pages el origen (Source) sea "GitHub Actions".
 name: Publicar en GitHub Pages
 
 on:
@@ -34,8 +34,6 @@ jobs:
 
       - name: Configurar Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Subir la web
         uses: actions/upload-pages-artifact@v3
