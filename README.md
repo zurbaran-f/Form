@@ -42,9 +42,10 @@ El envío usa [FormSubmit](https://formsubmit.co), un servicio gratuito que no
 necesita registro. La primera vez hay que confirmar la dirección:
 
 1. Abre el formulario ya publicado y envía una prueba con tus datos.
-2. FormSubmit enviará un correo a **zurbaranf@kosadesigns.com** con el asunto
-   *"Confirm your email"* (revisa spam).
-3. Pulsa el enlace de confirmación.
+2. Esa primera vez el navegador te llevará a una página de FormSubmit que dice
+   *"Confirm your email"*: es lo normal, todavía no está activado.
+3. FormSubmit enviará un correo a **zurbaranf@kosadesigns.com** con ese mismo
+   asunto (revisa spam). Pulsa el enlace de confirmación.
 
 A partir de ahí, cada envío llega a tu bandeja con el asunto *"Nuevo contacto
 desde el formulario web"* y los datos en una tabla. Puedes responder
@@ -102,6 +103,9 @@ Cambia la dirección y vuelve a confirmar (paso 2) con el correo nuevo.
 - **Anti-spam**: campo trampa invisible (`_honey`) que solo rellenan los robots.
 - **Sin JavaScript**: el formulario se envía igualmente por el método clásico y
   la persona acaba en `gracias.html`.
+- **Envío a prueba de fallos**: primero se intenta enviar sin salir de la página;
+  si eso no sale (por ejemplo, mientras el correo no está confirmado), el
+  formulario se manda solo por el método clásico en lugar de perder el contacto.
 - **Accesibilidad**: etiquetas asociadas a cada campo, errores anunciados por
   lectores de pantalla y foco visible.
 

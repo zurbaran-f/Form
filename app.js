@@ -11,7 +11,9 @@
   var form = document.getElementById('form');
   var statusEl = document.getElementById('status');
   var successEl = document.getElementById('success');
-  var submitBtn = document.getElementById('submit');
+  // Ojo: el id del botón no puede ser "submit", porque taparía el
+  // método form.submit() que usamos como plan B.
+  var submitBtn = document.getElementById('enviar');
   var nextUrl = document.getElementById('next-url');
 
   // Página de gracias para navegadores sin JavaScript (envío clásico).
@@ -114,16 +116,25 @@
         if (String(data.success) !== 'true') {
           throw new Error(data.message || 'Envío rechazado');
         }
+        sending(false);
         form.hidden = true;
         successEl.hidden = false;
         successEl.querySelector('h2').focus();
       })
       .catch(function () {
-        statusEl.textContent =
-          'No pudimos enviar el formulario. Revisa tu conexión e inténtalo de nuevo.';
-      })
-      .then(function () {
-        sending(false);
+        // El envío por AJAX no funciona mientras el correo de destino no esté
+        // confirmado (y algún navegador puede bloquearlo). En ese caso enviamos
+        // el formulario a la manera clásica: el navegador va a FormSubmit, que
+        // se encarga de la confirmación y después devuelve a gracias.html.
+        if (navigator.onLine === false) {
+          statusEl.textContent =
+            'Parece que no hay conexión. Inténtalo de nuevo cuando vuelvas a tener internet.';
+          sending(false);
+          return;
+        }
+        statusEl.textContent = 'Completando el envío…';
+        // form.submit() no dispara el evento 'submit', así que no vuelve aquí.
+        form.submit();
       });
   });
 

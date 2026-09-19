@@ -29,6 +29,9 @@
       <input type="hidden" name="_subject" value="Nuevo contacto desde el formulario web">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_next" id="next-url" value="">
+      <!-- Sin captcha: la trampa anti-spam de abajo ya filtra los robots y así
+           nadie se queda a medias por un captcha al enviar. -->
+      <input type="hidden" name="_captcha" value="false">
       <!-- Trampa anti-spam: invisible para personas, la rellenan los bots -->
       <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
 
@@ -56,7 +59,7 @@
         <p class="error" id="err-email" role="alert"></p>
       </div>
 
-      <button type="submit" class="btn" id="submit">
+      <button type="submit" class="btn" id="enviar">
         <span class="btn__label">Enviar</span>
         <span class="spinner" aria-hidden="true"></span>
       </button>
