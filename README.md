@@ -7,10 +7,14 @@ Son archivos estáticos (HTML, CSS y JavaScript): funcionan en cualquier hosting
 incluido GitHub Pages, sin servidor ni base de datos.
 
 ```
-index.html    el formulario
-styles.css    estilos (se adapta a móvil y a modo oscuro)
-app.js        validación y envío sin recargar la página
-gracias.html  página de "gracias" para navegadores sin JavaScript
+index.html            el formulario
+styles.css            estilos (se adapta a móvil y a modo oscuro)
+app.js                validación y envío sin recargar la página
+gracias.html          página de "gracias" para navegadores sin JavaScript
+qr/qr-formulario.svg  código QR en vectorial (para imprimir a cualquier tamaño)
+qr/qr-formulario.png  código QR en imagen (para redes, WhatsApp, documentos)
+qr/cartel.html        cartel imprimible con el QR
+tools/generar-qr.py   vuelve a generar el QR si cambias de dirección web
 ```
 
 ## 1. Publicarlo en internet (GitHub Pages, gratis)
@@ -44,7 +48,37 @@ directamente al correo de la persona.
 > la dirección por ese código en el atributo `action` de `index.html`, tu email
 > deja de aparecer en el código de la página y recibes menos spam.
 
-## 3. Cambiar el correo de destino
+## 3. El código QR
+
+En la carpeta `qr/` tienes el código QR que lleva al formulario. Apuntando con
+la cámara del móvil, cualquier persona llega directamente a la página.
+
+- `qr-formulario.png` — para WhatsApp, redes sociales o un documento.
+- `qr-formulario.svg` — vectorial: imprímelo en tarjeta, cartel o escaparate al
+  tamaño que quieras sin que pierda nitidez.
+- `cartel.html` — ábrelo en el navegador y pulsa **Imprimir cartel**: sale una
+  hoja A4 lista para colgar.
+
+Está generado con corrección de errores alta, así que se sigue leyendo aunque se
+ensucie o se tape una esquina. Como norma, no lo imprimas a menos de 2,5 cm de
+lado y deja el margen blanco que ya trae alrededor.
+
+**Apunta a:** `https://zurbaran-f.github.io/Form/`
+(la dirección de GitHub Pages del paso 1; el QR solo funcionará cuando esa
+página esté publicada).
+
+### Si publicas el formulario en otra dirección
+
+Vuelve a generar el QR con la dirección nueva:
+
+```bash
+pip install segno            # solo la primera vez
+python3 tools/generar-qr.py https://tu-dominio.com
+```
+
+El script actualiza el PNG, el SVG y la dirección que muestra el cartel.
+
+## 4. Cambiar el correo de destino
 
 Está en un único sitio, la línea `action` de `index.html`:
 

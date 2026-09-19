@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cartel con QR · Contáctanos</title>
+  <meta name="robots" content="noindex">
+  <style>
+    /* Cartel pensado para imprimir: colores fijos, sin modo oscuro. */
+    @page { size: A4; margin: 15mm; }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+      background: #f4f5f7;
+      color: #16181d;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .cartel {
+      width: 100%;
+      max-width: 520px;
+      padding: 48px 40px;
+      background: #fff;
+      border: 1px solid #e3e5ea;
+      border-radius: 18px;
+      box-shadow: 0 12px 32px rgba(16, 20, 40, .08);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.75rem, 6vw, 2.5rem);
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+
+    .lema {
+      margin: 0 auto 32px;
+      max-width: 22em;
+      color: #5c626e;
+      font-size: clamp(1rem, 3vw, 1.125rem);
+    }
+
+    .qr {
+      width: min(300px, 70vw);
+      height: auto;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .instruccion {
+      margin: 28px 0 4px;
+      font-size: 1.0625rem;
+      font-weight: 600;
+    }
+
+    .enlace {
+      margin: 0;
+      color: #5c626e;
+      font-size: .875rem;
+      word-break: break-all;
+    }
+
+    .imprimir {
+      margin-top: 28px;
+      padding: 11px 22px;
+      font: inherit;
+      font-weight: 600;
+      color: #fff;
+      background: #3b5bfd;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .imprimir:hover { background: #2f4ae0; }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .cartel { border: none; box-shadow: none; max-width: none; }
+      .imprimir { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="cartel">
+    <h1>Escanea y contáctanos</h1>
+    <p class="lema">Apunta con la cámara de tu móvil y déjanos tu nombre, teléfono y correo. Te escribimos enseguida.</p>
+
+    <img class="qr" src="qr-formulario.svg" alt="Código QR que abre el formulario de contacto" width="300" height="300">
+
+    <p class="instruccion">O entra desde tu navegador:</p>
+    <!-- La URL la actualiza tools/generar-qr.py -->
+    <p class="enlace"><span id="url">https://zurbaran-f.github.io/Form/</span></p>
+
+    <button type="button" class="imprimir" onclick="window.print()">Imprimir cartel</button>
+  </main>
+</body>
+</html>
