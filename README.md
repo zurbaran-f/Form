@@ -7,6 +7,7 @@ Son archivos estáticos (HTML, CSS y JavaScript): funcionan en cualquier hosting
 incluido GitHub Pages, sin servidor ni base de datos.
 
 ```
+.github/workflows/    publica la web sola en cada cambio
 index.html            el formulario
 styles.css            estilos (se adapta a móvil y a modo oscuro)
 app.js                validación y envío sin recargar la página
@@ -28,6 +29,12 @@ tools/generar-qr.py   vuelve a generar el QR si cambias de dirección web
 
 También puedes subir los cuatro archivos a cualquier hosting (Netlify, Vercel,
 Hostinger, cPanel…): basta con copiarlos a la carpeta pública.
+
+### Despliegue automático
+
+El repositorio incluye `.github/workflows/pages.yml`: cada vez que se sube un
+cambio a la rama `claude/contact-form-email-0954bz`, GitHub Actions publica la
+web de nuevo. No hay que hacer nada a mano.
 
 ## 2. Activar el envío de correos (solo una vez)
 
