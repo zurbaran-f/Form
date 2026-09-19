@@ -46,3 +46,24 @@ jobs:
       - name: Desplegar
         id: despliegue
         uses: actions/deploy-pages@v4
+
+      # Comprueba que la web responde de verdad, no solo que el despliegue
+      # dijo que sí. Deja en el registro el código HTTP de cada dirección.
+      - name: Comprobar que la web responde
+        run: |
+          publicada="${{ steps.despliegue.outputs.page_url }}"
+          echo "Dirección publicada: $publicada"
+          for intento in 1 2 3 4; do
+            codigo=$(curl -s -o /tmp/pagina.html -w "%{http_code}" -L "$publicada")
+            echo "Intento $intento -> HTTP $codigo"
+            [ "$codigo" = "200" ] && break
+            sleep 10
+          done
+          echo "--- primeras líneas de lo que sirve ---"
+          head -c 300 /tmp/pagina.html
+          echo ""
+          echo "--- otras direcciones, para comparar ---"
+          for url in             "https://zurbaran-f.github.io/Form/"             "https://zurbaran-f.github.io/form/"             "https://zurbaran-f.github.io/Form/index.html"             "https://zurbaran-f.github.io/"; do
+            echo "$(curl -s -o /dev/null -w '%{http_code}' -L "$url")  $url"
+          done
+          [ "$codigo" = "200" ]
