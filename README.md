@@ -1,7 +1,12 @@
 # Formulario de contacto
 
 Formulario web para recoger **nombre, teléfono y correo electrónico**. Cada envío
-llega por email a **zurbaranf@kosadesigns.com**.
+llega por email a **zurbaranf@gmail.com**, con copia a
+**zurbaranf@kosadesigns.com**.
+
+> El destino principal es el Gmail porque el servidor de correo de
+> kosadesigns.com rechaza los mensajes de FormSubmit (no llegan ni a spam).
+> La copia a kosadesigns.com se manda igualmente, por si ese filtro cambia.
 
 Son archivos estáticos (HTML, CSS y JavaScript): funcionan en cualquier hosting,
 incluido GitHub Pages, sin servidor ni base de datos.
@@ -89,13 +94,16 @@ El script actualiza el PNG, el SVG y la dirección que muestra el cartel.
 
 ## 4. Cambiar el correo de destino
 
-Está en un único sitio, la línea `action` de `index.html`:
+La dirección principal está en la línea `action` de `index.html`, y la copia en
+el campo `_cc`:
 
 ```html
-<form ... action="https://formsubmit.co/zurbaranf@kosadesigns.com" ...>
+<form ... action="https://formsubmit.co/zurbaranf@gmail.com" ...>
+  <input type="hidden" name="_cc" value="zurbaranf@kosadesigns.com">
 ```
 
-Cambia la dirección y vuelve a confirmar (paso 2) con el correo nuevo.
+Si cambias la principal, hay que volver a confirmarla (paso 2) con el correo
+nuevo. La copia no necesita confirmación.
 
 ## Detalles
 

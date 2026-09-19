@@ -16,17 +16,18 @@
     </header>
 
     <!--
-      El destinatario de los correos se define en la URL de "action".
-      Es el único sitio donde aparece: cámbialo ahí para enviar a otra dirección.
+      Destino de los avisos: la dirección de "action" es la principal (es la
+      que hay que confirmar una vez) y "_cc" recibe una copia.
     -->
     <form id="form"
           class="form"
-          action="https://formsubmit.co/zurbaranf@kosadesigns.com"
+          action="https://formsubmit.co/zurbaranf@gmail.com"
           method="POST"
           novalidate>
 
       <!-- Opciones de FormSubmit -->
       <input type="hidden" name="_subject" value="Nuevo contacto desde el formulario web">
+      <input type="hidden" name="_cc" value="zurbaranf@kosadesigns.com">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_next" id="next-url" value="">
       <!-- Sin captcha: la trampa anti-spam de abajo ya filtra los robots y así
