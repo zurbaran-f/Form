@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulario de contacto</title>
+  <meta name="description" content="Déjanos tus datos y te contactamos.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✉️</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="card">
+    <header class="card__head">
+      <h1>Contáctanos</h1>
+      <p class="sub">Déjanos tus datos y te escribimos lo antes posible.</p>
+    </header>
+
+    <!--
+      El destinatario de los correos se define en la URL de "action".
+      Es el único sitio donde aparece: cámbialo ahí para enviar a otra dirección.
+    -->
+    <form id="form"
+          class="form"
+          action="https://formsubmit.co/zurbaranf@kosadesigns.com"
+          method="POST"
+          novalidate>
+
+      <!-- Opciones de FormSubmit -->
+      <input type="hidden" name="_subject" value="Nuevo contacto desde el formulario web">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" id="next-url" value="">
+      <!-- Trampa anti-spam: invisible para personas, la rellenan los bots -->
+      <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="field">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" name="Nombre" autocomplete="name"
+               placeholder="Ej. María García" required maxlength="80"
+               aria-describedby="err-nombre">
+        <p class="error" id="err-nombre" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="Teléfono" autocomplete="tel"
+               placeholder="Ej. +34 600 123 456" required maxlength="25"
+               aria-describedby="err-telefono">
+        <p class="error" id="err-telefono" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="Email" autocomplete="email"
+               placeholder="Ej. maria@correo.com" required maxlength="120"
+               aria-describedby="err-email">
+        <p class="error" id="err-email" role="alert"></p>
+      </div>
+
+      <button type="submit" class="btn" id="submit">
+        <span class="btn__label">Enviar</span>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
+
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+      <p class="legal">Al enviar aceptas que usemos tus datos únicamente para ponernos en contacto contigo.</p>
+    </form>
+
+    <div class="success" id="success" hidden>
+      <div class="success__icon" aria-hidden="true">✓</div>
+      <h2 tabindex="-1">¡Mensaje enviado!</h2>
+      <p>Gracias por escribirnos. Te contactaremos muy pronto.</p>
+      <button type="button" class="btn btn--ghost" id="again">Enviar otro</button>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
