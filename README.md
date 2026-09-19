@@ -8,6 +8,7 @@ incluido GitHub Pages, sin servidor ni base de datos.
 
 ```
 .github/workflows/    publica la web sola en cada cambio
+apps-script/          programa que envía los avisos desde tu cuenta de Google
 index.html            el formulario
 styles.css            estilos (se adapta a móvil y a modo oscuro)
 app.js                validación y envío sin recargar la página
