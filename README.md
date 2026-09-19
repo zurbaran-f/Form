@@ -18,10 +18,12 @@ index.html            el formulario
 styles.css            estilos (se adapta a móvil y a modo oscuro)
 app.js                validación y envío sin recargar la página
 gracias.html          página de "gracias" para navegadores sin JavaScript
-qr/qr-formulario.svg  código QR en vectorial (para imprimir a cualquier tamaño)
-qr/qr-formulario.png  código QR en imagen (para redes, WhatsApp, documentos)
+qr/qr-kd.svg          código QR con el monograma KD (vectorial, para imprimir)
+qr/qr-kd.png          el mismo, en imagen (redes, WhatsApp, documentos)
+qr/qr-formulario.*    la versión lisa, sin monograma
 qr/cartel.html        cartel imprimible con el QR
-tools/generar-qr.py   vuelve a generar el QR si cambias de dirección web
+tools/generar-qr.py   vuelve a generar los QR si cambias de dirección web
+tools/fuentes/        la tipografía del monograma (licencia OFL incluida)
 ```
 
 ## 1. Publicarlo en internet (GitHub Pages, gratis)
@@ -67,15 +69,20 @@ directamente al correo de la persona.
 En la carpeta `qr/` tienes el código QR que lleva al formulario. Apuntando con
 la cámara del móvil, cualquier persona llega directamente a la página.
 
-- `qr-formulario.png` — para WhatsApp, redes sociales o un documento.
-- `qr-formulario.svg` — vectorial: imprímelo en tarjeta, cartel o escaparate al
-  tamaño que quieras sin que pierda nitidez.
+- `qr-kd.png` — con el monograma **KD** en el centro. Para WhatsApp, redes
+  sociales o un documento.
+- `qr-kd.svg` — el mismo, en vectorial: imprímelo en tarjeta, cartel o
+  escaparate al tamaño que quieras sin que pierda nitidez. Las letras van
+  convertidas en trazos, así que no hace falta tener la tipografía instalada.
+- `qr-formulario.svg` / `.png` — la versión lisa, sin monograma, por si alguna
+  vez la necesitas.
 - `cartel.html` — ábrelo en el navegador y pulsa **Imprimir cartel**: sale una
   hoja A4 lista para colgar.
 
-Está generado con corrección de errores alta, así que se sigue leyendo aunque se
-ensucie o se tape una esquina. Como norma, no lo imprimas a menos de 2,5 cm de
-lado y deja el margen blanco que ya trae alrededor.
+Los QR llevan corrección de errores alta (nivel H, tolera hasta un 30 % tapado),
+que es justo lo que permite poner el monograma encima sin que deje de leerse.
+Como norma, no los imprimas a menos de 2,5 cm de lado y deja el margen blanco
+que ya traen alrededor.
 
 **Apunta a:** `https://zurbaran-f.github.io/Form/`
 (la dirección de GitHub Pages del paso 1; el QR solo funcionará cuando esa
