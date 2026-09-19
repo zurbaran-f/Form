@@ -112,10 +112,11 @@ nuevo. La copia no necesita confirmación.
 - **Anti-spam**: campo trampa invisible (`_honey`) que solo rellenan los robots.
 - **Sin JavaScript**: el formulario se envía igualmente por el método clásico y
   la persona acaba en `gracias.html`.
-- **Envío a prueba de fallos**: primero se intenta enviar sin salir de la página;
-  si eso no sale (por ejemplo, mientras el correo no está confirmado, o si el
-  script no llega a cargar), el formulario se manda solo por el método clásico
-  en lugar de perder el contacto.
+- **Cómo se envía**: el formulario entrega los datos dentro de un marco
+  invisible. El navegador manda exactamente lo mismo que un formulario normal
+  (`application/x-www-form-urlencoded`, el formato que el servicio sabe leer) y
+  la persona no sale de la página. Si el script no llegara a cargar, el envío
+  funciona igual cambiando de página: no se pierde ningún contacto.
 - **Sin cachés traicioneras**: al desplegar, los enlaces a `styles.css` y
   `app.js` se sellan con el identificador del commit (`app.js?v=abc1234`), así
   que ningún navegador mezcla una versión nueva de la página con archivos
