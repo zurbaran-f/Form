@@ -13,7 +13,8 @@
   var successEl = document.getElementById('success');
   // Ojo: el id del botón no puede ser "submit", porque taparía el
   // método form.submit() que usamos como plan B.
-  var submitBtn = document.getElementById('enviar');
+  var submitBtn = document.getElementById('enviar') ||
+    form.querySelector('button[type="submit"]');
   var nextUrl = document.getElementById('next-url');
 
   // Página de gracias para navegadores sin JavaScript (envío clásico).
@@ -79,9 +80,11 @@
   }
 
   function sending(on) {
+    if (!submitBtn) { return; }
     submitBtn.disabled = on;
     submitBtn.classList.toggle('is-sending', on);
-    submitBtn.querySelector('.btn__label').textContent = on ? 'Enviando…' : 'Enviar';
+    var label = submitBtn.querySelector('.btn__label');
+    if (label) { label.textContent = on ? 'Enviando…' : 'Enviar'; }
   }
 
   form.addEventListener('submit', function (event) {
@@ -97,17 +100,25 @@
       return;
     }
 
-    // A partir de aquí enviamos por AJAX; si algo falla, avisamos sin perder
-    // los datos que la persona ya escribió.
+    // Intentamos enviar sin recargar la página. Preparamos todo ANTES de
+    // frenar el envío del navegador: si algo fallara aquí, preferimos que lo
+    // mande él a la manera de siempre antes que dejar el botón muerto.
+    var peticion;
+    try {
+      peticion = fetch(ajaxEndpoint(), {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+    } catch (e) {
+      return; // sigue el envío normal del navegador
+    }
+
     event.preventDefault();
-    statusEl.textContent = '';
+    if (statusEl) { statusEl.textContent = ''; }
     sending(true);
 
-    fetch(ajaxEndpoint(), {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
-    })
+    peticion
       .then(function (response) {
         if (!response.ok) { throw new Error('HTTP ' + response.status); }
         return response.json();
@@ -118,8 +129,11 @@
         }
         sending(false);
         form.hidden = true;
-        successEl.hidden = false;
-        successEl.querySelector('h2').focus();
+        if (successEl) {
+          successEl.hidden = false;
+          var titulo = successEl.querySelector('h2');
+          if (titulo) { titulo.focus(); }
+        }
       })
       .catch(function () {
         // El envío por AJAX no funciona mientras el correo de destino no esté
@@ -127,12 +141,14 @@
         // el formulario a la manera clásica: el navegador va a FormSubmit, que
         // se encarga de la confirmación y después devuelve a gracias.html.
         if (navigator.onLine === false) {
-          statusEl.textContent =
-            'Parece que no hay conexión. Inténtalo de nuevo cuando vuelvas a tener internet.';
+          if (statusEl) {
+            statusEl.textContent =
+              'Parece que no hay conexión. Inténtalo de nuevo cuando vuelvas a tener internet.';
+          }
           sending(false);
           return;
         }
-        statusEl.textContent = 'Completando el envío…';
+        if (statusEl) { statusEl.textContent = 'Completando el envío…'; }
         // form.submit() no dispara el evento 'submit', así que no vuelve aquí.
         form.submit();
       });
